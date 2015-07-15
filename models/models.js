@@ -3,11 +3,14 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
-	author: {
+	author: [{
 		type: Schema.Types.ObjectId,
-		ref: 'Author'},
+		ref: 'Author'}],
 	text: String,
-	comment: [CommentSchema]
+	comment: {
+		type: Schema.Types.ObjectId,
+		ref: 'Comment'
+	}
 });
 
 var Post = mongoose.model('Post', PostSchema);
@@ -22,7 +25,10 @@ var Comment = mongoose.model('Comment', CommentSchema);
 
 //Create a schema for Author
 var AuthorSchema = new Schema({
-	author: String
+	author: {
+		type: String,
+		default: ''
+	}
 })
 
 //Create model for author data
